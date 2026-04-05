@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sticky Notes Wall</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Sticky Notes Wall</h1>
+
+<div class="controls">
+    <input type="text" id="noteInput" placeholder="Write a note...">
+    <button onclick="addNote()">Add Note</button>
+</div>
+
+<div class="controls">
+    <input type="text" id="searchInput" placeholder="Search notes..." onkeyup="searchNotes()">
+    <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+</div>
+
+<div id="notesContainer"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

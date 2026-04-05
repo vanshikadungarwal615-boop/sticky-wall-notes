@@ -1,0 +1,84 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f0f0f0;
+    transition: 0.3s;
+}
+
+.controls {
+    margin: 15px;
+}
+
+#noteInput, #searchInput {
+    padding: 10px;
+    width: 200px;
+    margin: 5px;
+}
+
+button {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#notesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 15px;
+    justify-content: center;
+}
+
+.note {
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    cursor: grab;
+}
+
+.note.dragging {
+    opacity: 0.5;
+}
+
+.delete {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.pin {
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    cursor: pointer;
+}
+
+.timestamp {
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+/* Dark Mode */
+.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark .note {
+    color: black;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    #notesContainer {
+        grid-template-columns: repeat(auto-fill, 150px);
+    }
+
+    #noteInput, #searchInput {
+        width: 140px;
+    }
+
+    button {
+        padding: 8px;
+    }
+}
