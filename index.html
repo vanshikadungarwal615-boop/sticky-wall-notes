@@ -2,20 +2,23 @@
 <html>
 <head>
     <title>Sticky Notes Wall</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Sticky Notes Wall</h1>
+<h1>✨ Sticky Notes Wall</h1>
 
 <div class="controls">
     <input type="text" id="noteInput" placeholder="Write a note...">
-    <button onclick="addNote()">Add Note</button>
+    <input type="color" id="colorPicker">
+    <button onclick="addNote()">Add</button>
 </div>
 
 <div class="controls">
-    <input type="text" id="searchInput" placeholder="Search notes..." onkeyup="searchNotes()">
-    <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchNotes()">
+    <button onclick="toggleDarkMode()">🌙</button>
 </div>
 
 <div id="notesContainer"></div>

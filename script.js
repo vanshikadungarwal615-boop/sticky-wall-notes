@@ -1,13 +1,11 @@
 let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-const colors = ["#FFEB3B", "#FFCDD2", "#C8E6C9", "#BBDEFB", "#E1BEE7"];
+const defaultColors = ["#FFEB3B", "#FFCDD2", "#C8E6C9", "#BBDEFB", "#E1BEE7"];
 
-// Save notes
 function saveNotes() {
     localStorage.setItem("notes", JSON.stringify(notes));
 }
 
-// Render notes
 function renderNotes() {
     const container = document.getElementById("notesContainer");
     container.innerHTML = "";
@@ -25,11 +23,10 @@ function renderNotes() {
             <div class="timestamp">${note.time}</div>
         `;
 
-        // Edit note (double click)
+        // Edit
         div.addEventListener("dblclick", () => {
-            const newText = prompt("Edit your note:", note.text);
-
-            if (newText !== null && newText.trim() !== "") {
+            const newText = prompt("Edit note:", note.text);
+            if (newText && newText.trim() !== "") {
                 notes[index].text = newText.trim();
                 notes[index].time = new Date().toLocaleString();
                 saveNotes();
@@ -37,12 +34,11 @@ function renderNotes() {
             }
         });
 
-        // Drag start
+        // Drag
         div.addEventListener("dragstart", () => {
             div.classList.add("dragging");
         });
 
-        // Drag end (save order)
         div.addEventListener("dragend", () => {
             div.classList.remove("dragging");
 
@@ -61,42 +57,33 @@ function renderNotes() {
     });
 }
 
-// Add note
+// Add
 function addNote() {
-    const input = document.getElementById("noteInput");
-    const text = input.value.trim();
+    const text = document.getElementById("noteInput").value.trim();
+    const color = document.getElementById("colorPicker").value;
 
-    if (text === "") {
-        alert("Note cannot be empty!");
-        return;
-    }
+    if (!text) return alert("Empty note not allowed");
+    if (notes.length >= 20) return alert("Max 20 notes");
 
-    if (notes.length >= 20) {
-        alert("Maximum 20 notes allowed!");
-        return;
-    }
-
-    const newNote = {
-        text: text,
-        color: colors[Math.floor(Math.random() * colors.length)],
+    notes.push({
+        text,
+        color: color || defaultColors[Math.floor(Math.random() * defaultColors.length)],
         time: new Date().toLocaleString()
-    };
+    });
 
-    notes.push(newNote);
+    document.getElementById("noteInput").value = "";
     saveNotes();
     renderNotes();
-
-    input.value = "";
 }
 
-// Delete note
+// Delete
 function deleteNote(index) {
     notes.splice(index, 1);
     saveNotes();
     renderNotes();
 }
 
-// Pin note
+// Pin
 function pinNote(index) {
     const note = notes.splice(index, 1)[0];
     notes.unshift(note);
@@ -104,7 +91,7 @@ function pinNote(index) {
     renderNotes();
 }
 
-// Drag container logic
+// Drag container
 const container = document.getElementById("notesContainer");
 
 container.addEventListener("dragover", (e) => {
@@ -134,27 +121,23 @@ function getDragAfterElement(container, y) {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-// Search notes
+// Search
 function searchNotes() {
     const query = document.getElementById("searchInput").value.toLowerCase();
-    const allNotes = document.querySelectorAll(".note");
-
-    allNotes.forEach(note => {
-        const text = note.innerText.toLowerCase();
-        note.style.display = text.includes(query) ? "block" : "none";
+    document.querySelectorAll(".note").forEach(note => {
+        note.style.display = note.innerText.toLowerCase().includes(query) ? "block" : "none";
     });
 }
 
 // Dark mode
 function toggleDarkMode() {
     document.body.classList.toggle("dark");
-    localStorage.setItem("darkMode", document.body.classList.contains("dark"));
+    localStorage.setItem("dark", document.body.classList.contains("dark"));
 }
 
-// Load dark mode
-if (localStorage.getItem("darkMode") === "true") {
+if (localStorage.getItem("dark") === "true") {
     document.body.classList.add("dark");
 }
 
-// Initial render
+// Load
 renderNotes();
