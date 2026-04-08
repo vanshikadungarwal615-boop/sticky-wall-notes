@@ -1,25 +1,40 @@
 body {
     font-family: 'Poppins', sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
     margin: 0;
     min-height: 100vh;
-    transition: 0.3s;
+    background: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #fbc2eb, #a6c1ee);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+/* Animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 h1 {
     margin-top: 20px;
 }
 
-.controls {
-    margin: 15px;
+/* Glass box */
+.box {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 15px;
+    margin: 15px auto;
+    width: 320px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-input, button {
+.controls input, .controls button {
+    margin: 5px;
     padding: 10px;
     border-radius: 20px;
     border: none;
-    margin: 5px;
 }
 
 button {
@@ -35,17 +50,14 @@ button {
     justify-content: center;
 }
 
+/* Notes */
 .note {
     padding: 15px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     position: relative;
-    transition: 0.3s;
     cursor: grab;
-}
-
-.note.dragging {
-    opacity: 0.5;
+    transition: 0.3s;
 }
 
 .note:hover {
@@ -71,17 +83,18 @@ button {
     margin-top: 10px;
 }
 
-/* Dark mode */
+/* Dark Mode */
 .dark {
     background: #121212;
     color: white;
+    animation: none;
+}
+
+.dark .box {
+    background: rgba(0,0,0,0.6);
 }
 
 .dark input {
     background: #333;
     color: white;
-}
-
-.dark .note {
-    color: black;
 }
