@@ -3,6 +3,8 @@ body {
     text-align: center;
     margin: 0;
     min-height: 100vh;
+
+    /* Animated Gradient Background */
     background: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #fbc2eb, #a6c1ee);
     background-size: 400% 400%;
     animation: gradientBG 10s ease infinite;
@@ -19,7 +21,7 @@ h1 {
     margin-top: 20px;
 }
 
-/* Glass box */
+/* Glass Box UI */
 .box {
     background: rgba(255, 255, 255, 0.6);
     padding: 15px;
@@ -30,6 +32,7 @@ h1 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* Inputs & Buttons */
 .controls input, .controls button {
     margin: 5px;
     padding: 10px;
@@ -43,6 +46,7 @@ button {
     cursor: pointer;
 }
 
+/* Notes Grid */
 #notesContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, 200px);
@@ -50,7 +54,7 @@ button {
     justify-content: center;
 }
 
-/* Notes */
+/* NOTE BOX (FIXED TEXT VISIBILITY 🔥) */
 .note {
     padding: 15px;
     border-radius: 15px;
@@ -58,12 +62,16 @@ button {
     position: relative;
     cursor: grab;
     transition: 0.3s;
+
+    color: #000;            /* ✅ TEXT FIX */
+    font-weight: 500;
 }
 
 .note:hover {
     transform: scale(1.05);
 }
 
+/* Buttons inside note */
 .delete {
     position: absolute;
     top: 5px;
@@ -83,7 +91,7 @@ button {
     margin-top: 10px;
 }
 
-/* Dark Mode */
+/* DARK MODE 🌙 */
 .dark {
     background: #121212;
     color: white;
@@ -97,4 +105,9 @@ button {
 .dark input {
     background: #333;
     color: white;
+}
+
+/* KEEP NOTE TEXT VISIBLE IN DARK MODE */
+.dark .note {
+    color: #000;   /* ✅ IMPORTANT FIX */
 }
